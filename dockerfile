@@ -1,23 +1,25 @@
-# Usa una imagen con Node 20
 FROM node:20
 
-# Crea y setea el directorio de trabajo
 WORKDIR /app
 
-# Copia package.json y lockfile primero para aprovechar caching
+# Copiamos solo lo necesario para instalar dependencias primero
 COPY package*.json ./
 
-# Instalación limpia de dependencias
+# Instalamos dependencias
 RUN npm install
 
-# Copiamos el resto del código fuente
+# Forzamos permisos de ejecución sobre el binario de tsc
+RUN chmod +x ./node_modules/.bin/tsc || true
+
+# Copiamos el resto del proyecto
 COPY . .
 
-# Build del proyecto (compila TypeScript)
+# Volvemos a dar permisos por si tsc vino después del copy
+RUN chmod +x ./node_modules/.bin/tsc || true
+
+# Ejecutamos el build
 RUN npm run build
 
-# Expone el puerto (ajustá si usas otro)
 EXPOSE 3000
 
-# Comando para producción
 CMD ["npm", "run", "start"]
