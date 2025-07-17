@@ -5,7 +5,7 @@ WORKDIR /app
 
 # 1. Copiamos archivos necesarios primero
 COPY package*.json ./
-COPY prisma ./prisma       # 👈 Copiar antes de npm install por el postinstall
+COPY prisma ./prisma      
 
 # 2. Instalamos dependencias (postinstall incluye prisma generate)
 RUN npm install
