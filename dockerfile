@@ -2,20 +2,18 @@ FROM node:20
 
 WORKDIR /app
 
-# Paso 1: copiar solo package.json y lock
+# Instalar deps primero
 COPY package*.json ./
-
-# Paso 2: instalar dependencias
 RUN npm install
 
-# Paso 3: copiar la carpeta prisma antes de generar cliente
-COPY prisma ./prisma
+# Copiar código fuente
+COPY . .
 
-# Paso 4: generar cliente Prisma
+# Asegurar schema y generar Prisma
 RUN npx prisma generate
 
-# Paso 5: copiar el resto del código fuente
-COPY . .
+# Compilar TypeScript
+RUN npm run build
 
 EXPOSE 3000
 
