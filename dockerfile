@@ -16,7 +16,7 @@ COPY . .
 # Build del proyecto (compila TypeScript)
 RUN npm run build
 
-# Expone el puerto (ajustá si usás otro)
+# Expone el puerto (ajustá si usas otro)
 EXPOSE 3000
 
 # Comando para producción
