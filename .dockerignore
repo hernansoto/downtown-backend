@@ -1,22 +1,11 @@
-# Node modules
 node_modules
 npm-debug.log
-
-# Builds locales
 dist
 .cache
-
-# Archivos del entorno
 .env
 .env.*
-
-# Configs de sistema
 .DS_Store
 Thumbs.db
-
-# Git y otros
 .git
 .gitignore
-Dockerfile.dev
-.nixpacks.toml
 README.md

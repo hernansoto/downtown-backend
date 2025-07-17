@@ -1,27 +1,29 @@
-# Usamos una imagen oficial de Node
+# Usa una imagen oficial de Node.js
 FROM node:20
 
-# Creamos el directorio de trabajo
+# Crea el directorio de trabajo
 WORKDIR /app
 
-# Copiamos los archivos necesarios primero
+# Copia package.json y package-lock.json
 COPY package*.json ./
+
+# Copia el schema de Prisma
 COPY prisma ./prisma
 
-# Instalamos dependencias
+# Instala dependencias y genera Prisma Client
 RUN npm install
 
-# Copiamos el resto del código
+# Copia el resto del proyecto
 COPY . .
 
-# Generamos el cliente de Prisma
+# Genera el cliente de Prisma por si acaso
 RUN npx prisma generate
 
-# Compilamos el proyecto
+# Compila el proyecto (NestJS)
 RUN npm run build
 
-# Exponemos el puerto (mismo que usa NestJS)
+# Expone el puerto
 EXPOSE 3000
 
-# Comando para arrancar el servidor
+# Comando para arrancar la app
 CMD ["node", "dist/main.js"]
