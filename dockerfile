@@ -3,8 +3,14 @@ FROM node:20
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install --omit=dev
 
+# Instalamos dependencias
+RUN npm install
+
+# Generamos el cliente de Prisma
+RUN npx prisma generate
+
+# Copiamos el resto del proyecto
 COPY . .
 
 EXPOSE 3000
