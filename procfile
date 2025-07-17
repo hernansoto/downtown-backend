@@ -1,1 +1,1 @@
-web: npm start
+web: docker run -p 3000:3000 downtown_api
