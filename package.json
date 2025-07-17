@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node dist/main.js",
     "build": "npx tsc",
-    "start:dev": "ts-node-dev --respawn --transpile-only src/main.ts"
+    "start:dev": "ts-node-dev --respawn --transpile-only src/main.ts",
+     "postinstall": "chmod +x ./node_modules/.bin/tsc"
   },
   "keywords": [],
   "author": "",
