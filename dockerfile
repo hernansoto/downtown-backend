@@ -2,22 +2,22 @@ FROM node:20
 
 WORKDIR /app
 
-# 1. Copiamos package.json y package-lock.json
+# 1. Copiamos primero package.json y lock
 COPY package*.json ./
 
-# 2. Copiamos el esquema de Prisma
+# 2. Copiamos la carpeta prisma
 COPY prisma ./prisma
 
-# 3. Instalamos dependencias (esto ejecuta "postinstall" con prisma generate)
+# 3. Instalamos dependencias y se genera prisma por postinstall
 RUN npm install
 
-# 4. Copiamos el resto del proyecto
+# 4. Copiamos el resto del código
 COPY . .
 
-# 5. Volvemos a generar Prisma Client (con el código ya copiado)
-RUN npx prisma generate
+# 5. Reparamos permisos y regeneramos cliente prisma
+RUN chmod +x ./node_modules/.bin/prisma && npx --yes prisma generate
 
-# 6. Compilamos el proyecto
+# 6. Compilamos
 RUN npm run build
 
 EXPOSE 3000
