@@ -2,19 +2,19 @@ FROM node:20
 
 WORKDIR /app
 
-# Copiar package.json + lockfile
+# Paso 1: copiar solo package.json y lock
 COPY package*.json ./
 
-# Copiar carpeta de Prisma (necesaria para generar el cliente)
-COPY prisma ./prisma
-
-# Instalar dependencias
+# Paso 2: instalar dependencias
 RUN npm install
 
-# Generar el cliente Prisma (ya tiene schema)
+# Paso 3: copiar la carpeta prisma antes de generar cliente
+COPY prisma ./prisma
+
+# Paso 4: generar cliente Prisma
 RUN npx prisma generate
 
-# Copiar el resto del código
+# Paso 5: copiar el resto del código fuente
 COPY . .
 
 EXPOSE 3000
