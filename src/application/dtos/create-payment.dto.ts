@@ -1,3 +1,3 @@
 export class CreatePaymentDto {
-  reservationId: string;
+  reservationId!: string;
 }
