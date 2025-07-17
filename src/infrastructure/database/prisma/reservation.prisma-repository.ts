@@ -50,7 +50,16 @@ export class ReservationPrismaRepository implements ReservationRepository {
       orderBy: { date: 'asc' }
     });
 
-    return rows.map((r) => new Reservation(
+    interface ReservationRow {
+      id: string;
+      date: Date;
+      time: string;
+      status: 'pending' | 'confirmed' | 'cancelled' | string;
+      createdAt: Date;
+      updatedAt: Date;
+    }
+
+    return rows.map((r: ReservationRow) => new Reservation(
       r.id,
       r.date,
       r.time,
@@ -109,7 +118,16 @@ async findByDate(date: string): Promise<Reservation[]> {
     },
   });
 
-  return results.map(r => new Reservation(
+  interface ReservationRow {
+    id: string;
+    date: Date;
+    time: string;
+    status: 'pending' | 'confirmed' | 'cancelled' | string;
+    createdAt: Date;
+    updatedAt: Date;
+  }
+
+  return results.map((r: ReservationRow) => new Reservation(
     r.id,
     r.date,
     r.time,

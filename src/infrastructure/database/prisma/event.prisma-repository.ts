@@ -12,7 +12,18 @@ export class EventPrismaRepository implements EventRepository {
       orderBy: { date: 'asc' }
     });
 
-    return events.map(event => new Event(
+    interface PrismaEvent {
+      id: string;
+      title: string;
+      description: string;
+      date: Date;
+      type: string;
+      imageUrl: string;
+      createdAt: Date;
+      updatedAt: Date;
+    }
+
+    return events.map((event: PrismaEvent) => new Event(
       event.id,
       event.title,
       event.description,
@@ -55,7 +66,18 @@ export class EventPrismaRepository implements EventRepository {
       orderBy: { date: 'asc' },
     });
 
-    return events.map(event => new Event(
+    interface PrismaEvent {
+      id: string;
+      title: string;
+      description: string;
+      date: Date;
+      type: string;
+      imageUrl: string;
+      createdAt: Date;
+      updatedAt: Date;
+    }
+
+    return events.map((event: PrismaEvent) => new Event(
       event.id,
       event.title,
       event.description,
