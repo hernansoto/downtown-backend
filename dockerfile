@@ -2,17 +2,17 @@ FROM node:20
 
 WORKDIR /app
 
-# Instalar deps primero
 COPY package*.json ./
 RUN npm install
 
-# Copiar código fuente
-COPY . .
-
-# Asegurar schema y generar Prisma
+COPY prisma ./prisma
 RUN npx prisma generate
 
-# Compilar TypeScript
+COPY . .
+
+# 🔧 Forzar permisos para tsc antes de usarlo
+RUN chmod +x ./node_modules/.bin/tsc
+
 RUN npm run build
 
 EXPOSE 3000
