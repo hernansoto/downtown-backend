@@ -8,16 +8,13 @@ COPY package*.json ./
 # 2. Copiamos la carpeta prisma
 COPY prisma ./prisma
 
-# 3. Instalamos dependencias y se genera prisma por postinstall
+# 3. Instalamos dependencias y se genera Prisma Client por postinstall
 RUN npm install
 
 # 4. Copiamos el resto del código
 COPY . .
 
-# 5. Reparamos permisos y regeneramos cliente prisma
-RUN chmod +x ./node_modules/.bin/prisma && npx --yes prisma generate
-
-# 6. Compilamos
+# 5. Compilamos
 RUN npm run build
 
 EXPOSE 3000
