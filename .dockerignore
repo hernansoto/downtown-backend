@@ -17,7 +17,6 @@ Thumbs.db
 # Git y otros
 .git
 .gitignore
-docker-compose.yml
 Dockerfile.dev
 .nixpacks.toml
 README.md
